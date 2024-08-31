@@ -2,7 +2,7 @@
 // @name         jin10-futures-assistant
 // @namespace    http://qihuo.jin10.com/
 // @version      2024-08-31
-// @description  assistant for qihuo.jin10.com
+// @description  Tampermonkey script for qihuo.jin10.com
 // @author       Gnekiah
 // @match        https://qihuo.jin10.com/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=csdn.net
@@ -18,6 +18,25 @@
         }
     });
 
+    let whitelist_keywords = [
+        "CFTC"
+    ];
+    let blacklist_keywords = [
+        "期货盯盘神器",
+        "交易夜读",
+        "订单流5分钟图显示",
+        "热门品种观点分享",
+        "量价分布与订单流复盘",
+        "技术分析",
+        "资金炸弹复盘",
+        "品种交易逻辑"
+    ];
+    let blacklist_image_links = [
+        "https://cdn-news.jin10.com/assets/common/13679271-9e9e-4b4f-8143-03a5524c78e9.jpg",
+        "https://cdn-news.jin10.com/assets/common/33e9e3d7-9484-47e7-bed2-f64d7f2c4e48.jpg",
+        "https://flash-scdn.jin10.com/1375ec78-c99c-4aa1-a6bc-496d5d25df4c.png"
+    ];
+
     const es_ushk_header = document.getElementsByClassName("ushk-header");
     while(es_ushk_header.length > 0){
         es_ushk_header[0].parentNode.removeChild(es_ushk_header[0]);
@@ -31,21 +50,23 @@
         es_watermark[0].parentNode.removeChild(es_watermark[0]);
     }
 
+    function find_keyword_in_list(keywords, text) {
+        for (let i = 0; i < keywords.length; i++) {
+            if (text.indexOf(keywords[i]) > -1) {
+                return 1;
+            }
+        }
+        return -1;
+    }
+
     function ushk_list_handler(target_node, max_loop) {
         const ushk_flash_item_J_flash_item = target_node.getElementsByClassName("ushk-flash_item J_flash_item");
         for(let i = 0; i < ushk_flash_item_J_flash_item.length && i < max_loop; i++) {
             const text = ushk_flash_item_J_flash_item[i].innerText;
             // 先过滤关键词白名单，再过滤关键词黑名单
-            if (text.indexOf("CFTC") > -1) {
+            if (find_keyword_in_list(whitelist_keywords, text) > -1) {
                 ushk_flash_item_J_flash_item[i].setAttribute("style", "padding-top: 5px");
-            } else if (text.indexOf("期货盯盘神器") > -1
-                || text.indexOf("交易夜读") > -1
-                || text.indexOf("订单流5分钟图显示") > -1
-                || text.indexOf("热门品种观点分享") > -1
-                || text.indexOf("量价分布与订单流复盘") > -1
-                || text.indexOf("技术分析") > -1
-                || text.indexOf("资金炸弹复盘") > -1
-                || text.indexOf("品种交易逻辑") > -1) {
+            } else if (find_keyword_in_list(blacklist_keywords, text) > -1) {
                 console.log(text);
                 ushk_flash_item_J_flash_item[i].parentNode.removeChild(ushk_flash_item_J_flash_item[i]);
                 i--;
@@ -63,8 +84,7 @@
         }
         const imgtags = target_node.getElementsByTagName("img");
         for (var i = imgtags.length - 1; i >= 0; i--) {
-            if (imgtags[i].src.indexOf("https://cdn-news.jin10.com/assets/common/13679271-9e9e-4b4f-8143-03a5524c78e9.jpg") > -1
-               || imgtags[i].src.indexOf("https://cdn-news.jin10.com/assets/common/33e9e3d7-9484-47e7-bed2-f64d7f2c4e48.jpg") > -1) {
+            if (find_keyword_in_list(blacklist_image_links, imgtags[i].src) > -1) {
                 imgtags[i].parentNode.removeChild(imgtags[i]);
             }
         }
@@ -154,6 +174,5 @@
 
     }, 2000);
 })();
-
 
 
