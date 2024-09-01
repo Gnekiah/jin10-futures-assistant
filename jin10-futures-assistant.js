@@ -61,9 +61,9 @@
         return -1;
     }
 
-    function ushk_list_handler(target_node, max_loop) {
+    function ushk_list_handler(target_node) {
         const ushk_flash_item_J_flash_item = target_node.getElementsByClassName("ushk-flash_item J_flash_item");
-        for(let i = 0; i < ushk_flash_item_J_flash_item.length && i < max_loop; i++) {
+        for(let i = 0; i < ushk_flash_item_J_flash_item.length; i++) {
             const text = ushk_flash_item_J_flash_item[i].innerText;
             // 先过滤关键词白名单，再过滤关键词黑名单
             if (find_keyword_in_list(whitelist_keywords, text) > -1) {
@@ -77,11 +77,11 @@
             }
         }
         const ushk_flash_data_b = target_node.getElementsByClassName("ushk-flash_data_b");
-        for(let i = Math.min(max_loop, ushk_flash_data_b.length - 1); i >= 0; i--) {
+        for(let i = ushk_flash_data_b.length - 1; i >= 0; i--) {
             ushk_flash_data_b[i].parentNode.removeChild(ushk_flash_data_b[i]);
         }
         const dingpan_remark_bottom = target_node.getElementsByClassName("dingpan-remark_bottom");
-        for(let i = Math.min(max_loop, dingpan_remark_bottom.length - 1); i >= 0; i--) {
+        for(let i = dingpan_remark_bottom.length - 1; i >= 0; i--) {
             dingpan_remark_bottom[i].parentNode.removeChild(dingpan_remark_bottom[i]);
         }
         const imgtags = target_node.getElementsByTagName("img");
@@ -124,12 +124,12 @@
         }
 
         const ushk_group = document.getElementById("J_flash_list");
-        ushk_list_handler(ushk_group, 65535);
+        ushk_list_handler(ushk_group);
 
         new MutationObserver((mutationsList, self) => {
             for(const mutation of mutationsList) {
                 if(mutation.type === "childList"){
-                    ushk_list_handler(ushk_group, 10);
+                    ushk_list_handler(ushk_group);
                 }
             }
         }).observe(ushk_group, { childList: true });
