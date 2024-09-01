@@ -37,6 +37,8 @@
         "https://flash-scdn.jin10.com/1375ec78-c99c-4aa1-a6bc-496d5d25df4c.png"
     ];
 
+    var g_last_time_id = "";
+
     const es_ushk_header = document.getElementsByClassName("ushk-header");
     while(es_ushk_header.length > 0){
         es_ushk_header[0].parentNode.removeChild(es_ushk_header[0]);
@@ -121,20 +123,10 @@
             es_channel_list_span[i].setAttribute("style", "padding: 0px");
         }
 
-        const ushk_group = document.getElementsByClassName("ushk-flash__group J_flash_group")[0];
+        const ushk_group = document.getElementById("J_flash_list");
         ushk_list_handler(ushk_group, 65535);
 
-        var is_history_date_observerred = 0;
         new MutationObserver((mutationsList, self) => {
-            if (is_history_date_observerred == 0) {
-                const ushk_group_historyDate = document.getElementsByClassName("ushk-flash__group J_flash_group historyDate")[0];
-                if (ushk_group_historyDate) {
-                    setTimeout(function(){
-                        ushk_list_handler(ushk_group_historyDate, 65535);
-                    }, 2000);
-                    is_history_date_observerred = 1;
-                }
-            }
             for(const mutation of mutationsList) {
                 if(mutation.type === "childList"){
                     ushk_list_handler(ushk_group, 10);
@@ -142,7 +134,6 @@
             }
         }).observe(ushk_group, { childList: true });
 
-        var g_last_time_id = ""
         const ushk_flash_item_J_flash_item = ushk_group.getElementsByClassName("ushk-flash_item J_flash_item");
         const ushk_flash_time = ushk_flash_item_J_flash_item[0].getElementsByClassName("ushk-flash_time")[0].innerText.replaceAll(":", "-");
         g_last_time_id = ushk_flash_time;
@@ -167,11 +158,7 @@
                 last_stop_button = document.getElementById("last_stop_button");
                 last_stop_button.value = "跳转到上次标记：" + g_last_time_id;
             };
-            //ushk_flash_item_J_flash_item[i].setAttribute("id", "you id")
         }
-
-
-
     }, 2000);
 })();
 
