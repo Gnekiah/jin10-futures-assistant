@@ -105,6 +105,9 @@
     // 对每条消息div添加一个点击事件，用来更新跳转信息
     function ushk_set_item_id(target_node) {
         target_node.onclick = function() {
+            document.getElementById("g_last_stop_id_" + g_last_time_id).style.border = "0px";
+            target_node.style.border = "3px solid rgba(255, 128, 0, 0.5)";
+
             g_last_time_id = target_node.getElementsByClassName("ushk-flash_time")[0].innerText.replaceAll(":", "-");
             target_node.setAttribute("id", "g_last_stop_id_" + g_last_time_id);
             last_stop_button = document.getElementById("last_stop_button");
@@ -119,24 +122,16 @@
             const text = div.innerText;
             // 先过滤关键词白名单，再过滤关键词黑名单
             if (find_keyword_in_list(whitelist_keywords, text) > -1) {
-                div.setAttribute("style", "padding-top: 5px");
+                div.setAttribute("style", "padding-top: 5px; border-radius: 8px");
                 ushk_set_item_id(div);
             } else if (find_keyword_in_list(blacklist_keywords, text) > -1) {
                 console.log(text);
                 div.setAttribute("style", "visibility: hidden; height: 0px;  width: 0px; margin: 0px; padding: 0px; display: none");
             } else {
-                div.setAttribute("style", "padding-top: 5px");
+                div.setAttribute("style", "padding-top: 5px; border-radius: 8px");
                 ushk_set_item_id(div);
             }
         }
-        //const ushk_flash_h = target_node.getElementsByClassName("ushk-flash_h");
-        //for (const div of ushk_flash_h) {
-        //    div.setAttribute("style", "padding: 0px");
-        //}
-        //const ushk_flash_b = target_node.getElementsByClassName("ushk-flash_b");
-        //for (const div of ushk_flash_b) {
-        //    div.setAttribute("style", "padding: 0px");
-        //}
 
         const ushk_flash_data_b = target_node.getElementsByClassName("ushk-flash_data_b");
         for (const div of ushk_flash_data_b) {
@@ -154,6 +149,10 @@
             if (find_keyword_in_list(blacklist_image_links, img.src) > -1) {
                 img.setAttribute("style", "visibility: hidden; height: 0px;  width: 0px; margin: 0px; padding: 0px; display: none");
             }
+        }
+
+        if (g_last_time_id != "") {
+            document.getElementById("g_last_stop_id_" + g_last_time_id).style.border = "3px solid rgba(255, 128, 0, 0.5)";
         }
     }
 
@@ -191,6 +190,14 @@
         const ushk_group_parent = ushk_group.parentNode;
         ushk_list_handler(ushk_group_parent);
 
+        // 默认将列表第一条消息设置为标记位置
+        const ushk_group_top_item = ushk_group.getElementsByClassName("ushk-flash_item J_flash_item")[0];
+        const ushk_flash_time = ushk_group_top_item.getElementsByClassName("ushk-flash_time")[0].innerText.replaceAll(":", "-");
+        g_last_time_id = ushk_flash_time;
+        ushk_group_top_item.setAttribute("id", "g_last_stop_id_" + ushk_flash_time);
+        last_stop_button = document.getElementById("last_stop_button");
+        last_stop_button.value = "跳转到上次标记：" + g_last_time_id;
+
         // 添加消息更新的监听事件
         new MutationObserver((mutationsList, self) => {
             ushk_list_handler(ushk_group);
@@ -212,15 +219,7 @@
         }).observe(ushk_group_parent, { childList: true });
         g_observer_list.push(ushk_group_parent);
 
-        // 默认将列表第一条消息设置为标记位置
-        const ushk_group_top_item = ushk_group.getElementsByClassName("ushk-flash_item J_flash_item")[0];
-        const ushk_flash_time = ushk_group_top_item.getElementsByClassName("ushk-flash_time")[0].innerText.replaceAll(":", "-");
-        g_last_time_id = ushk_flash_time;
-        ushk_group_top_item.setAttribute("id", "g_last_stop_id_" + ushk_flash_time);
-        last_stop_button = document.getElementById("last_stop_button");
-        last_stop_button.value = "跳转到上次标记：" + g_last_time_id;
-
-    }, 2000);
+    }, 5000);
 })();
 
 
