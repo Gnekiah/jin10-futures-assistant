@@ -52,6 +52,7 @@
         "https://cdn-news.jin10.com/assets/common/7ac16be9-232f-4279-bc33-5040a8a97862.jpg",// PP
         "https://cdn-news.jin10.com/assets/common/7093a3b1-8ee9-4845-8d9d-6795096aa2b2.jpg",// PVC
         "https://cdn-news.jin10.com/assets/common/fd578307-fa2a-4b19-8551-73657c357bcd.jpg",// PTA
+        "https://cdn-news.jin10.com/assets/common/779e03d9-279d-4484-b422-f322f1fc836c.jpg",// 乙二醇
         "https://cdn-news.jin10.com/assets/common/978fa203-b4b0-4e19-a4dc-b5fe89cc7e68.jpg",// 橡胶
         "https://cdn-news.jin10.com/assets/common/33e9e3d7-9484-47e7-bed2-f64d7f2c4e48.jpg",// 豆粕
         "https://cdn-news.jin10.com/assets/common/4200df63-143a-43ce-860d-233e1e1b73dd.jpg",// 菜粕
@@ -64,7 +65,8 @@
         "https://cdn-news.jin10.com/assets/common/6e3e562c-fd7d-4af5-ac91-7661850ce9ad.jpg",// 生猪
         "https://cdn-news.jin10.com/assets/common/52f3ddff-d53c-488a-8370-9f62d68516f6.jpg",// 航运
         "https://flash-scdn.jin10.com/1375ec78-c99c-4aa1-a6bc-496d5d25df4c.png",
-        "https://flash-scdn.jin10.com/85194ea0-b68c-49bd-8c61-c1208a3dac06.jpg"
+        "https://flash-scdn.jin10.com/85194ea0-b68c-49bd-8c61-c1208a3dac06.jpg",
+        "https://flash-scdn.jin10.com/39a9fee1-8d0b-421f-9bb9-007f8ba48000.jpg"
     ];
 
     var g_last_time_id = "";
@@ -78,7 +80,12 @@
     es_ushk_side[0].setAttribute("style", "visibility: hidden; height: 0px; width: 0px; margin: 0px; padding: 0px; display: none");
 
     const es_watermark = document.getElementsByClassName("watermark");
-    es_watermark[0].setAttribute("style", "visibility: hidden; height: 0px;  width: 0px; margin: 0px; padding: 0px; display: none");
+    es_watermark[0].setAttribute("style", "visibility: hidden; height: 0px; width: 0px; margin: 0px; padding: 0px; display: none");
+
+    const ushk_backtop_is_show = document.getElementsByClassName("ushk-backtop is-show");
+    ushk_backtop_is_show[0].setAttribute("style", "visibility: hidden; height: 0px; width: 0px; margin: 0px; padding: 0px; display: none");
+    const ushk_backtop_ushk_feedback = document.getElementsByClassName("ushk-backtop ushk-feedback is-show");
+    ushk_backtop_ushk_feedback[0].setAttribute("style", "visibility: hidden; height: 0px; width: 0px; margin: 0px; padding: 0px; display: none");
 
     // 添加一个按钮用来跳转
     const ushk_news_handle = document.getElementsByClassName("ushk-news__handle")[0];
