@@ -40,6 +40,7 @@
         "https://cdn-news.jin10.com/assets/common/d4ac9f34-09da-44c8-9dac-63c5a667c1ab.jpg",// 氧化铝
         "https://cdn-news.jin10.com/assets/common/317c5dce-0065-47d5-af04-6bd9a6a210a5.jpg",// 原油
         "https://cdn-news.jin10.com/assets/common/e93d9707-3407-439e-8cbc-5c6dca9c3c07.jpg",// 燃料油
+        "https://cdn-news.jin10.com/assets/common/68e32cdf-e27e-40cc-ac2a-f9bab69b17c2.jpg",// LPG
         "https://cdn-news.jin10.com/assets/common/41195501-edba-4e8d-b4e5-9887c338c45c.jpg",// 铁矿石
         "https://cdn-news.jin10.com/assets/common/a889cf66-4eb6-40b5-8d87-cc1a66f6d78c.jpg",// 焦煤
         "https://cdn-news.jin10.com/assets/common/17659d35-bb8b-4f59-ab97-4c2f7c8567a0.jpg",// 螺纹钢
@@ -54,6 +55,8 @@
         "https://cdn-news.jin10.com/assets/common/fd578307-fa2a-4b19-8551-73657c357bcd.jpg",// PTA
         "https://cdn-news.jin10.com/assets/common/779e03d9-279d-4484-b422-f322f1fc836c.jpg",// 乙二醇
         "https://cdn-news.jin10.com/assets/common/978fa203-b4b0-4e19-a4dc-b5fe89cc7e68.jpg",// 橡胶
+        "https://img.jin10.com/mp/24/08/zeoHqf1_5v7JYSMz4F10m.jpg",// 20号胶
+        "https://img.jin10.com/mp/24/08/m_6Nzp72jGPdtosYZt42z.jpg",// BR橡胶
         "https://cdn-news.jin10.com/assets/common/33e9e3d7-9484-47e7-bed2-f64d7f2c4e48.jpg",// 豆粕
         "https://cdn-news.jin10.com/assets/common/4200df63-143a-43ce-860d-233e1e1b73dd.jpg",// 菜粕
         "https://cdn-news.jin10.com/assets/common/4c118b32-334f-4287-b41b-8a0d1177598d.jpg",// 棕榈油
